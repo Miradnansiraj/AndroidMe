@@ -15,6 +15,9 @@ import simple.app.called.androidme.data.AndroidImageAssets;
 public class BodyPartFragment extends Fragment
 {
     private ImageView rootImage;
+    private View rootView;
+    private int imageNum = 0;
+
     public BodyPartFragment()
     {
 
@@ -24,10 +27,8 @@ public class BodyPartFragment extends Fragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        View rootView = inflater.inflate(R.layout.fragment_body_part, container, false);
+        rootView = inflater.inflate(R.layout.fragment_body_part, container, false);
         rootImage = rootView.findViewById(R.id.body_part_image_view);
-        rootImage.setImageResource(AndroidImageAssets.getHeads().get(0));
-
         return rootView;
     }
 }
