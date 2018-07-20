@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AndroidMe</string>
+    <string name="body_part_fragment_description">This is a sexy body of android.</string>
 </resources>
