@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import simple.app.called.androidme.R;
@@ -20,6 +21,7 @@ public class BodyPartFragment extends Fragment
     private View rootView;
     private int imageNum;
     private List<Integer> imageArray;
+    private static String IMAGENUM = "image_num", IMAGEARRAY = "image_array";
 
     public BodyPartFragment()
     {
@@ -30,6 +32,13 @@ public class BodyPartFragment extends Fragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
+        //Check saveInstanceState
+        if(savedInstanceState != null)
+        {
+            imageNum = savedInstanceState.getInt(IMAGENUM);
+            imageArray = savedInstanceState.getIntegerArrayList(IMAGEARRAY);
+        }
+
         rootView = inflater.inflate(R.layout.fragment_body_part, container, false);
         rootImage = rootView.findViewById(R.id.body_part_image_view);
         rootImage.setImageResource(imageArray.get(imageNum));
@@ -46,6 +55,13 @@ public class BodyPartFragment extends Fragment
             }
         });
         return rootView;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle currentState)
+    {
+        currentState.putInt(IMAGENUM, imageNum);
+        currentState.putIntegerArrayList(IMAGEARRAY,(ArrayList<Integer>) imageArray);
     }
 
     public void setImageNum(int imageNum)

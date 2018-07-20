@@ -21,22 +21,25 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         exitToast = Toast.makeText(this, "Press again to exit", Toast.LENGTH_LONG);
 
-        //Fragments
-        headFragment = new BodyPartFragment();
-        bodyFragment = new BodyPartFragment();
-        legFragment = new BodyPartFragment();
-        headFragment.setimageArray(AndroidImageAssets.getHeads());
-        headFragment.setImageNum(2);
-        bodyFragment.setimageArray(AndroidImageAssets.getBodies());
-        bodyFragment.setImageNum(2);
-        legFragment.setimageArray(AndroidImageAssets.getLegs());
-        legFragment.setImageNum(2);
+        if(savedInstanceState == null)
+        {
+            //Fragments
+            headFragment = new BodyPartFragment();
+            bodyFragment = new BodyPartFragment();
+            legFragment = new BodyPartFragment();
+            headFragment.setimageArray(AndroidImageAssets.getHeads());
+            headFragment.setImageNum(2);
+            bodyFragment.setimageArray(AndroidImageAssets.getBodies());
+            bodyFragment.setImageNum(2);
+            legFragment.setimageArray(AndroidImageAssets.getLegs());
+            legFragment.setImageNum(2);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .add(R.id.head_container, headFragment)
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .add(R.id.head_container, headFragment)
                     .add(R.id.body_container, bodyFragment)
-                        .add(R.id.leg_container, legFragment).commit();
+                    .add(R.id.leg_container, legFragment).commit();
+        }
     }
 
     @Override
@@ -45,9 +48,6 @@ public class MainActivity extends AppCompatActivity
         if(back_pressed+2000>System.currentTimeMillis())
         {
             super.onBackPressed();
-            headFragment.onDestroyView();
-            bodyFragment.onDestroyView();
-            legFragment.onDestroyView();
             exitToast.cancel();
         }
         back_pressed = System.currentTimeMillis();
