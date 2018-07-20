@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import simple.app.called.androidme.R;
+import simple.app.called.androidme.data.AndroidImageAssets;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -24,7 +25,12 @@ public class MainActivity extends AppCompatActivity
         headFragment = new BodyPartFragment();
         bodyFragment = new BodyPartFragment();
         legFragment = new BodyPartFragment();
-
+        headFragment.setimageArray(AndroidImageAssets.getHeads());
+        headFragment.setImageNum(2);
+        bodyFragment.setimageArray(AndroidImageAssets.getBodies());
+        bodyFragment.setImageNum(2);
+        legFragment.setimageArray(AndroidImageAssets.getLegs());
+        legFragment.setImageNum(2);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
