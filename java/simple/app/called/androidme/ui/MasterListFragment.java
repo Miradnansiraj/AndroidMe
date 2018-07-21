@@ -16,11 +16,13 @@ package simple.app.called.androidme.ui;/*
 
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import simple.app.called.androidme.R;
@@ -32,6 +34,14 @@ import simple.app.called.androidme.ui.MasterListAdapter;
 // The list appears as a grid of images
 public class MasterListFragment extends Fragment
 {
+    private OnImageClickListener onImageClickListener;
+
+
+    //interface to communicate between fragments
+    public interface OnImageClickListener
+    {
+        void onImageSelected(int position);
+    }
 
     // Mandatory empty constructor
     public MasterListFragment()
@@ -57,8 +67,32 @@ public class MasterListFragment extends Fragment
         // Set the adapter on the GridView
         gridView.setAdapter(mAdapter);
 
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+            {
+                onImageClickListener.onImageSelected(i);
+            }
+        });
+
         // Return the root view
         return rootView;
     }
 
+    @Override
+    public void onAttach(Context context)
+    {
+        super.onAttach(context);
+
+        //check if interface was implemented
+        try
+        {
+            onImageClickListener = (OnImageClickListener) context;
+        }
+        catch (ClassCastException e)
+        {
+            throw new ClassCastException(context.toString() + " must implement OnImageClickListener");
+        }
+    }
 }
