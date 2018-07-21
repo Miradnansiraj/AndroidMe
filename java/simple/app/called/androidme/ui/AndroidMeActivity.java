@@ -8,7 +8,7 @@ import android.widget.Toast;
 import simple.app.called.androidme.R;
 import simple.app.called.androidme.data.AndroidImageAssets;
 
-public class MainActivity extends AppCompatActivity
+public class AndroidMeActivity extends AppCompatActivity
 {
     private static long back_pressed = 0;
     private BodyPartFragment headFragment, bodyFragment, legFragment;
@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.android_me_activity);
         exitToast = Toast.makeText(this, "Press again to exit", Toast.LENGTH_LONG);
 
         if(savedInstanceState == null)
