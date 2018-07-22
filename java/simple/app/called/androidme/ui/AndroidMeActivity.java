@@ -10,29 +10,31 @@ import simple.app.called.androidme.data.AndroidImageAssets;
 
 public class AndroidMeActivity extends AppCompatActivity
 {
-    private static long back_pressed = 0;
     private BodyPartFragment headFragment, bodyFragment, legFragment;
-    private Toast exitToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.android_me_activity);
-        exitToast = Toast.makeText(this, "Press again to exit", Toast.LENGTH_LONG);
-
         if(savedInstanceState == null)
         {
+            //Using the bundle
+            int headIndex = 0, bodyIndex = 0, legIndex =0;
+            headIndex = getIntent().getExtras().getInt("Head");
+            bodyIndex = getIntent().getExtras().getInt("Body");
+            legIndex = getIntent().getExtras().getInt("Leg");
+
             //Fragments
             headFragment = new BodyPartFragment();
             bodyFragment = new BodyPartFragment();
             legFragment = new BodyPartFragment();
             headFragment.setimageArray(AndroidImageAssets.getHeads());
-            headFragment.setImageNum(2);
+            headFragment.setImageNum(headIndex);
             bodyFragment.setimageArray(AndroidImageAssets.getBodies());
-            bodyFragment.setImageNum(2);
+            bodyFragment.setImageNum(bodyIndex);
             legFragment.setimageArray(AndroidImageAssets.getLegs());
-            legFragment.setImageNum(2);
+            legFragment.setImageNum(legIndex);
 
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
@@ -40,17 +42,5 @@ public class AndroidMeActivity extends AppCompatActivity
                     .add(R.id.body_container, bodyFragment)
                     .add(R.id.leg_container, legFragment).commit();
         }
-    }
-
-    @Override
-    public void onBackPressed()
-    {
-        if(back_pressed+2000>System.currentTimeMillis())
-        {
-            super.onBackPressed();
-            exitToast.cancel();
-        }
-        back_pressed = System.currentTimeMillis();
-        exitToast.show();
     }
 }

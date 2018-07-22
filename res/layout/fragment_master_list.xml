@@ -11,17 +11,28 @@
  limitations under the License.-->
 
 <!-- GridView that displays AndroidMe images -->
-<GridView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/images_grid_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:adjustViewBounds="true"
-    android:columnWidth="180dp"
-    android:gravity="center"
-    android:horizontalSpacing="8dp"
-    android:numColumns="3"
-    android:padding="16dp"
-    android:stretchMode="columnWidth"
-    android:verticalSpacing="8dp">
-</GridView>
+    android:orientation="vertical"
+    android:layout_gravity="center">
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/next_button"
+        android:text="@string/button_text"/>
+    <GridView
+        android:id="@+id/images_grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:columnWidth="180dp"
+        android:gravity="center"
+        android:horizontalSpacing="8dp"
+        android:numColumns="3"
+        android:padding="16dp"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="8dp">
+    </GridView>
+</LinearLayout>
